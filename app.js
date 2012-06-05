@@ -1,5 +1,5 @@
 var express = require('express'),
-    app = express.createServer(),
+    app = express.createServer(express.logger()),
     io = require('socket.io').listen(app),
     routes = require('./routes');
 
@@ -22,9 +22,15 @@ app.configure('production', function() {
   app.use(express.errorHandler());
 });
 
+io.configure(function () { 
+  io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 10); 
+});
+
 // Routes
 
-app.listen(3000, function() {
+var port = process.env.PORT || 5000;
+app.listen(port, function() {
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
 
