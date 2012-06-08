@@ -1,3 +1,5 @@
+var app = require('../app');
+
 /*
  * GET home page.
  */

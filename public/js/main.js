@@ -1,9 +1,17 @@
 var socket = io.connect(window.location.hostname);
 
-socket.on('status', function (data) {
-    $('#status').html(data.status);
+socket.on('time', function (data) {
+    $('#countdown').html(data.time);
+});
+
+$('#start').click(function() {
+    socket.emit('click:start');
+});
+
+$('#stop').click(function() {
+    socket.emit('click:stop');
 });
 
 $('#reset').click(function() {
-    socket.emit('reset');
+    socket.emit('click:reset');
 });
