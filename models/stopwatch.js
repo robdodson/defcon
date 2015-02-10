@@ -60,7 +60,9 @@ Stopwatch.prototype.reset = function() {
 };
 
 Stopwatch.prototype.onTick = function() {
-    this.time -= this.second;
+    if(this.time > 0) {
+        this.time -= this.second;
+    }
 
     var formattedTime = this.formatTime(this.time);
     this.emit('tick:stopwatch', formattedTime);
