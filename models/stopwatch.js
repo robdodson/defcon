@@ -5,7 +5,7 @@ var util    = require('util'),
 // ---------------------------------------------
 // Constructor
 // ---------------------------------------------
-function Stopwatch() {
+function Stopwatch(startTime) {
     if(false === (this instanceof Stopwatch)) {
         return new Stopwatch();
     }
@@ -13,7 +13,9 @@ function Stopwatch() {
     this.hour = 3600000;
     this.minute = 60000;
     this.second = 1000;
-    this.time = this.hour;
+
+    this.startTime = startTime || this.hour;
+    this.time = this.startTime;
     this.interval = undefined;
 
     events.EventEmitter.call(this);
@@ -53,9 +55,9 @@ Stopwatch.prototype.stop = function() {
     }
 };
 
-Stopwatch.prototype.reset = function() {
+Stopwatch.prototype.reset = function(restartTime) {
     console.log('Resetting Stopwatch!');
-    this.time = this.hour;
+    this.time = restartTime || this.startTime;
     this.emit('reset:stopwatch', this.formatTime(this.time));
 };
 
