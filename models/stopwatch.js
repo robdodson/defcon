@@ -20,7 +20,7 @@ function Stopwatch() {
 
     // Use Underscore to bind all of our methods
     // to the proper context
-    _.bindAll(this);
+    _.bindAll(this, 'start', 'stop', 'reset', 'onTick', 'formatTime', 'getTime');
 };
 
 // ---------------------------------------------
